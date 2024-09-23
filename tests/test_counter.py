@@ -58,4 +58,25 @@ class TestCounterEndPoints:
         updated_value = result.json['zen']
         assert updated_value == initial_value + 1
     
+    def test_delete_a_counter(self, client):
+        """It should update a counter value"""
+        # Create the counter
+        result = client.post('/counters/ben')
+        assert result.status_code == status.HTTP_201_CREATED
+    
+        # delete the counter
+        result = client.delete('/counters/ben')
+        assert result.status_code == status.HTTP_204_NO_CONTENT
+        
+        # try to update counter was deleted and see if 404 is returned 
+        result = client.put('/counters/ben')
+        assert result.status_code == status.HTTP_404_NOT_FOUND
+        
+        # then test if the deleted counter can be deleted again shoud not be allowed
+        result = client.delete('/counters/ben')
+        assert result.status_code == status.HTTP_404_NOT_FOUND
+      
+    
+
+    
     
