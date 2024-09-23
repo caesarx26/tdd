@@ -10,7 +10,7 @@ COUNTERS = {}
 # let Flask know that the only methods that are allowed to be called
 # on this function is "POST".
 @app.route('/counters/<name>', methods=['POST'])
-def create_counter(name): 
+def create_counter(name):
     """Create a counter"""
     app.logger.info(f"Request to create counter: {name}")
     global COUNTERS
@@ -21,7 +21,7 @@ def create_counter(name):
 
 
 @app.route('/counters/<name>', methods=['PUT'])
-def update_counter(name): 
+def update_counter(name):
     """Update counter by 1"""
     app.logger.info(f"Request to update counter by 1: {name}")
     global COUNTERS
